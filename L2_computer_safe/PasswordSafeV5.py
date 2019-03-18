@@ -35,14 +35,26 @@ def mode1(allpass,amazon,mightyape,google):
 
 def mode2():
     addweb = input("What is the name of the website you would like to add?: ")
+    adduse = input("What is the username you would like to add?: ")
+    addpass = input("What is the name of the password you would like to add?: ")
     allpass.append(addweb)
 
-
-
-
-
-
-    
+def mode3():
+    change = input("would you like to change your username or password")
+    if change == 'username':
+        uchange = input("What is the website you would like to change your username for?: ")
+        if uchange == 'Amazon':
+            del amazon [1]
+            newu = input("What is the new username you would like to enter?: ")
+            amazon.insert(1,'Username: '+newu)
+            print(amazon)
+    elif change == 'password':
+        pchange = input("What is the website you would like to change your password for?: ")
+        if pchange == 'Amazon':
+            del amazon [2]
+            newp = input("What is the new password you would like to enter?: ")
+            amazon.append('Password: '+newp)
+            print(amazon)
 
 
 #lists for storing websites, usernames and passwords
