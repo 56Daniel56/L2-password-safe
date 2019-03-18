@@ -1,5 +1,6 @@
 #note add delays inbetween each print statement as to much info to read
 #function for selecting mode
+#passwordsafe
 def select():
     print("There are several modes you can select within this password safe.")
     print("Including:\n('1')Find an existing password\n('2')Add new new password\n('3')Change an existing password\n('4')Exit")
