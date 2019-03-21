@@ -1,5 +1,10 @@
-list6 = [2,3,4,5]
-if 1 in list6:
-    print("yay")
+try:
+    mode = int(input("choose selected mode by entering one of the formentioned numbers: "))
+    while (mode>=1) or (mode<=4):
+        break
+except ValueError:
+        print("That is not a number, please enter a number.")
 else:
-    print("nay")
+    print("range")
+
+

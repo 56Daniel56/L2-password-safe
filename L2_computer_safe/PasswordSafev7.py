@@ -1,84 +1,176 @@
+#L2-Password-Safe
+
+
+
+import time
+
 #note add delays inbetween each print statement as to much info to read
 #function for selecting mode
 #passwordsafe
+
+#This when run asks the user whether the want to run the program again
+def runAgain():
+    #while loop used for error checking
+    while True:
+            run= input("Would you like to run this program again: yes/no: ")
+            #user enters a yes continues the program
+            if run == 'yes':
+                select()
+                break
+            #user enters a no quits the program
+            elif run == 'no':
+                quit()
+            else:
+                #else input is not valid and asks the user for another input
+                print("You have not entred 'yes' or 'no'. Please read the question carefully and tryagain: ")
+                continue
+        
+    
 def select():
     while True:
         print("There are several modes you can select within this password safe.")
-        print("Including:\n('1')Find an existing password\n('2')Add new new password\n('3')Change an existing password\n('4')Exit")
-        mode = input("choose selected mode by entering one of the formentioned numbers: ")
+        print("Including:\n('1')Find an existing account\n('2')Add a new account\n('3')Change an existing username or password\n('4')Exit")
+        mode = (input("choose selected mode by entering one of the formentioned numbers: "))
         #once user has entred mode is mode 1 runs this code
         if mode == '1':
+            #runs the code when the user is wanting to check for a existing username and password
             mode1(allpass,usernames,passwords)
+            break
         elif mode == '2':
+            #this runs if the user is wanting to insert a new account to the program
             mode2(allpass,usernames,passwords)
+            break
         elif mode == '3':
-             mode3(usernames,passwords,allpass)
+            #mode 3 is to change an existing username or password
+            mode3(usernames,passwords,allpass,run)
+            break    
         elif mode == '4':
+            #mode 4 quits the program
             quit()
         else:
-            print("Sorry, you have entred an invalid input. Please read the question carefully and try again.")
+            #user has not entred a correct input tells them why and runs the loop again
+            print("You have not entred a number, or it is out of range. Please read the question carefully and try again.")
             continue
-        
-        
+
 #separate function for each mode as it separates code and looks cleaner, I have used a function because it will allow me to use this code infinite times
 #this function ie: mode 1 allows the user to display exisisting account information
 def mode1(allpass,usernames,passwords):
     #allpass in this print statement tells the user of all websites that have the account info all ready saved
-    print("Which password would you like to select out of",allpass)
-    watpass = input(": ")
-    #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
-    #This part also compare watpass to the user input and see what password they would like to display
-    if watpass in allpass:
-        print(usernames[watpass])
-        print(passwords[watpass])
+    while True:
+        print("Which account would you like to select out of",allpass)
+        watpass = input(": ")
+        #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
+        #This part also compare watpass to the user input and see what password they would like to display
+        if watpass in allpass:
+            print(usernames[watpass])
+            print(passwords[watpass])
+            break
+        else:
+            print("Sorry this account is not avalible within this program. Please try typing in the website again typing the letters exactly the same as it displays.")
+            continue
+    
+    runAgain()
+    
 
 #function envolving creating a new account for a new website.
 
 def mode2(allpass,usernames,passwords):
+    #variable so the program knows the name of the website you want to add
     addweb = input("What is the name of the website you would like to add?: ")
+    #username added here
     adduse = input("What is the username you would like to add?: ")
+    #password added here
     addpass = input("What is the name of the password you would like to add?: ")
+    #addweb which is the website is being appended to the list allpass which holds all the websites
     allpass.append(addweb)
-    usernames[addweb] = adduse
-    passwords[addweb] = addpass
-    print("New username:",usernames[addweb])
-    print("New password:",passwords[addweb])
-
-def mode3(usernames,passwords,allpass):
-    change = input("would you like to change your username or password")
-    if change == 'username':
-        uchange = input("What is the website you would like to change your username for?: ")
-        if uchange == 'Amazon':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Amazon'] = newuse
-            print(usernames['Amazon'],"is now your new username")
-        elif uchange == 'Mightyape':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Mightyape'] = newuse
-            print(usernames['Mightyape'],"is now your new username")
+    #setting the new username and password inside their specific dictionaries
+    usernames[addweb] = ('Username:'+adduse)
+    passwords[addweb] = ('Password:'+addpass)
+    #displays the new username and password
+    print(usernames[addweb])
+    print(passwords[addweb])
+    while True:
+        #checks user entred the corect and are happy with the values they have entred
+        corect = input("Are you happy with what you have entred? 'yes' or 'no' :")
+        if corect== 'yes':
+            break
+        elif corect== 'no':
+            #starts mode 2 again so then the user can have another go at entering the website
+            print("Ok, we will start again.")
+            mode2(allpass,usernames,passwords)
+            break
+        else:
+            print("Please try again as that input was not 'yes' or 'no'.")
+            continue
+    runAgain()
             
-        elif uchange == 'Google':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Google'] = newuse
-            print(usernames['Google'],"is now your new username")
+        
 
-            
-    elif change == 'password':
-        pchange = input("What is the website you would like to change your password for?: ")
-        if pchange == 'Amazon':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Amazon'] = newpass
-            print(passwords['Amazon'],"is now your new password")
-        elif pchange == 'Mightyape':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Mightyape'] = newpass
-            print(passwords['Mightyape'],"is now your new password")
-        elif pchange == 'Google':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Google'] = newpass
-            print(passwords['Google'],"is now your new password")
+#mode 3 allows user to change a username or password for one of the websites
+def mode3(usernames,passwords,allpass,run):
+    while True:
+        #asking whether the username or password wants to be changed
+        change = input("would you like to change your username or password: ")
+        if change == 'username':
+            while run<=1:
+                #displays all websites avilible to be changed
+                print("What is the website you would like to change your username for? Out of",allpass)
+                uchange = input(": ")
+                if uchange in allpass:
+                    newuse = input("What is the new username you would like to enter?: ")
+                    #enters new username into the dictionary
+                    usernames[uchange] = ('Username:'+newuse)
+                    #shows the user that it has been changed
+                    print(usernames[uchange],"is now set")
+                    #changes run to run=2 so the loop will not be ran again
+                    run=run+1
+                    break
+                else:
+                    print("Sorry that is not a website or you have spelt it incorect, please try again and enter carefully.")
+                    continue
 
+        elif change == 'password':
+            while run<=1:
+                #displays all websites avilible to be changed
+                print("What is the website you would like to change your password for? Out of",allpass)
+                pchange = input(": ")
+                if pchange in allpass:
+                    newpass = input("What is the new password you would like to enter?: ")
+                    #enters new password into the dictionary
+                    passwords[pchange] = ('Password:'+newpass)
+                    #shows the user that it has been changed
+                    print(passwords[pchange],"is now set")
+                    #changes run to run=2 so the loop will not be ran again
+                    run=run+1
+                    break
+                else:
+                    print("Sorry that is not a website or you have spelt it incorect, please try again and enter carefully.")
+                    continue
+        else:
+            ("tryagain")
+            continue
+        while True:
+            #checks user entred the corect values
+            corect = input("Are you happy with what you have changed?. 'yes' or 'no': ")
+            if corect== 'yes':
+                break
+            elif corect== 'no':
+                #give the user another go at entering their new username or password
+                print("Ok, we will start again.")
+                run=1
+                mode3(usernames,passwords,allpass,run)
+                break
+                
+            else:
+                print("Please try again as that input was not 'yes' or 'no'.")
+                continue
+        runAgain()
+#here
 
+        #here
+
+#very important varable, this lets me run nested loop and than quit them when corect input is recieved
+run=1
 #lists for storing websites, usernames and passwords
 
 #stores the diffrent names of the websites that you have saved
@@ -101,12 +193,16 @@ MASID = 'daniel.h'
 MASPASS = 'simple'
 
 #the code that prevents user from entering the rest of the program unless they have this info
-nameuser = input("Enter the Master id: ")
-if nameuser == MASID:
+while True:
+    nameuser = input("Enter the Master id: ")
     passuser = input("Enter the Master password: ")
-    if passuser == MASPASS:
+    if nameuser == MASID and passuser == MASPASS:
         print ("Secusfully signed in.")
         select()
+
+    else:
+        print("Sorry you have either either entred the username or password incorectly")
+        continue
 """            
 #if the user does not have an account they can create one here            
 elif returnuser == 'no':
