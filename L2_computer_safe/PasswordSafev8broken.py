@@ -62,7 +62,7 @@ def mode1(allpass,usernames,passwords):
         watpass = input(": ")
         #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
         #This part also compare watpass to the user input and see what password they would like to display
-        if watpass in allpass:
+        if watpass == num:
             print(usernames[watpass])
             print(passwords[watpass])
             break
@@ -83,6 +83,7 @@ def mode2(allpass,usernames,passwords,count):
     #password added here
     addpass = input("What is the name of the password you would like to add?: ")
     #addweb which is the website is being appended to the list allpass which holds all the websites
+    count=count+1
     allpass[count] = (addweb)
     
     
@@ -96,7 +97,6 @@ def mode2(allpass,usernames,passwords,count):
         #checks user entred the corect and are happy with the values they have entred
         corect = input("Are you happy with what you have entred? 'yes' or 'no': ")
         if corect== 'yes':
-            count=count+1
             break
         elif corect== 'no':
             #starts mode 2 again so then the user can have another go at entering the website
@@ -107,8 +107,9 @@ def mode2(allpass,usernames,passwords,count):
         else:
             print("Please try again as that input was not 'yes' or 'no'.")
             continue
-    return count
-    select()        
+    select()
+
+            
 
 #mode 3 allows user to change a username or password for one of the websites
 def mode3(usernames,passwords,allpass,run):
@@ -173,12 +174,12 @@ def mode3(usernames,passwords,allpass,run):
 
 #very important varable, this lets me run nested loop and than quit them when corect input is recieved
 run=1
-count=4
+count=3
 #lists for storing websites, usernames and passwords
 
 #stores the diffrent names of the websites that you have saved
-allpass = {'1':'Amazon','2':'Mightyape','3':'Google'}
 
+allpass = {'1':'Amazon','2':'Mightyape','3':'Google'}
 #I have decided to use diticionaries he as it allows me to store multiple keys and call certain ones whenever I want
 #stores the acount information for all the usernames
 usernames = {'Amazon':'Username: Danny',
@@ -196,6 +197,7 @@ MASID = 'daniel.h'
 MASPASS = 'simple01yes'
 
 #the code that prevents user from entering the rest of the program unless they have this info
+
 while True:
     #just simple username and password to stop someone random using the program
     userid = input("Enter the Master id: ")
@@ -211,11 +213,5 @@ while True:
         continue
 
 """            
-#if the user does not have an account they can create one here            
-elif returnuser == 'no':
-    newuser = input("Enter your new username: ")
-    newpass = input("Enter your new password: ")
-    print("Secusfully created a new account")
 
-    
 """
