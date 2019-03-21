@@ -2,7 +2,7 @@
 
 
 
-import time
+
 
 #note add delays inbetween each print statement as to much info to read
 #function for selecting mode
@@ -24,13 +24,12 @@ def runAgain():
                 #else input is not valid and asks the user for another input
                 print("You have not entred 'yes' or 'no'. Please read the question carefully and tryagain: ")
                 continue
-        
     
 def select():
     while True:
-        print("Hello,",name,". There are several modes you can select within this password safe.")
-        print("Including:\n('1')Find an existing account\n('2')Add a new account\n('3')Change an existing username or password\n('4')Exit")
-        mode = (input("choose selected mode by entering one of the formentioned numbers: "))
+        print("Hello,",name,". This is a password safe programed in python to store account information for websites or anything else you desire.\n There are several modes you can select within this password safe.")
+        print("\nIncluding:\n('1')Find an existing account\n('2')Adding a new account\n('3')Changing an existing username or password\n('4')Exit this program")
+        mode =(input("choose selected mode by entering one of the formentioned numbers which corespondes to the desired mode: "))
         #once user has entred mode is mode 1 runs this code
         if mode == '1':
             #runs the code when the user is wanting to check for a existing username and password
@@ -38,7 +37,7 @@ def select():
             break
         elif mode == '2':
             #this runs if the user is wanting to insert a new account to the program
-            mode2(allpass,usernames,passwords)
+            mode2(allpass,usernames,passwords,count)
             break
         elif mode == '3':
             #mode 3 is to change an existing username or password
@@ -57,7 +56,9 @@ def select():
 def mode1(allpass,usernames,passwords):
     #allpass in this print statement tells the user of all websites that have the account info all ready saved
     while True:
-        print("Which account would you like to select out of",allpass)
+        print("Which account would you like to select out of")
+        for num,web in allpass.items():
+            print(num,web)
         watpass = input(": ")
         #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
         #This part also compare watpass to the user input and see what password they would like to display
@@ -69,13 +70,12 @@ def mode1(allpass,usernames,passwords):
         else:
             print("Sorry",name," this account is not avalible within this program. Please try typing in the website again typing the letters exactly the same as it displays.")
             continue
-    
-    runAgain()
+    select()
     
 
 #function envolving creating a new account for a new website.
 
-def mode2(allpass,usernames,passwords):
+def mode2(allpass,usernames,passwords,count):
     #variable so the program knows the name of the website you want to add
     addweb = input("What is the name of the website you would like to add?: ")
     #username added here
@@ -83,7 +83,9 @@ def mode2(allpass,usernames,passwords):
     #password added here
     addpass = input("What is the name of the password you would like to add?: ")
     #addweb which is the website is being appended to the list allpass which holds all the websites
-    allpass.append(addweb)
+    allpass[count] = (addweb)
+    
+    
     #setting the new username and password inside their specific dictionaries
     usernames[addweb] = ('Username:'+adduse)
     passwords[addweb] = ('Password:'+addpass)
@@ -94,18 +96,19 @@ def mode2(allpass,usernames,passwords):
         #checks user entred the corect and are happy with the values they have entred
         corect = input("Are you happy with what you have entred? 'yes' or 'no': ")
         if corect== 'yes':
+            count=count+1
             break
         elif corect== 'no':
             #starts mode 2 again so then the user can have another go at entering the website
             print("Ok",name,", we will start again.")
             mode2(allpass,usernames,passwords)
+            count=count-1
             break
         else:
             print("Please try again as that input was not 'yes' or 'no'.")
             continue
-    runAgain()
-            
-        
+    return count
+    select()        
 
 #mode 3 allows user to change a username or password for one of the websites
 def mode3(usernames,passwords,allpass,run):
@@ -148,7 +151,7 @@ def mode3(usernames,passwords,allpass,run):
                     print("Sorry that is not a website or you have spelt it incorect, please try again and enter carefully.")
                     continue
         else:
-            ("tryagain")
+            ("Try entering either 'username' or 'password'")
             continue
         while True:
             #checks user entred the corect values
@@ -167,16 +170,14 @@ def mode3(usernames,passwords,allpass,run):
                 print(name,", please try again as that input was not 'yes' or 'no'.")
                 continue
         runAgain()
-#here
-
-        #here
 
 #very important varable, this lets me run nested loop and than quit them when corect input is recieved
 run=1
+count=4
 #lists for storing websites, usernames and passwords
 
 #stores the diffrent names of the websites that you have saved
-allpass = ['Amazon','Mightyape','Google']
+allpass = {'1':'Amazon','2':'Mightyape','3':'Google'}
 
 #I have decided to use diticionaries he as it allows me to store multiple keys and call certain ones whenever I want
 #stores the acount information for all the usernames
@@ -206,8 +207,9 @@ while True:
         select()
 
     else:
-        print("Sorry you have either entred the username or password incorectly")
+        print("Sorry you have either entred the username or password incorectly, you need to ener these corectly to access the rest of the program")
         continue
+
 """            
 #if the user does not have an account they can create one here            
 elif returnuser == 'no':
