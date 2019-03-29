@@ -36,6 +36,8 @@ google = [
 cusid = 'daniel.h'
 cuspass = 'simple'
 
+
+print("Daniel Herbert, 15th March 2019, Version 2 of Password safe.")
 #checking whether returning user or new
 returnuser = input("Are you a returing user?: ")
 if returnuser == 'yes':
@@ -46,11 +48,6 @@ if returnuser == 'yes':
             print ("Secusfully signed in.")
             select(allpass,amazon,mightyape,google)
             
-            
-elif returnuser == 'no':
-    newuser = input("Enter your new username: ")
-    newpass = input("Enter your new password: ")
-    print("Secusfully created a new account")
 
     
 

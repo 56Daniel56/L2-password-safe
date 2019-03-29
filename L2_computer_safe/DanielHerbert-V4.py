@@ -194,6 +194,9 @@ passwords = {'Amazon':'Password: Super01',
 MASID = 'daniel.h'
 MASPASS = 'simple01yes'
 
+
+print("Daniel Herbert, 20th March 2019, Version 7 of Password safe.")
+
 #the code that prevents user from entering the rest of the program unless they have this info
 while True:
     #just simple username and password to stop someone random using the program

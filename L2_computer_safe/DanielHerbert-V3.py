@@ -7,77 +7,86 @@ def select():
     mode = input("choose selected mode by entering one of the formentioned numbers: ")
     #once user has entred mode is mode 1 runs this code
     if mode == '1':
-        mode1(allpass,usernames,passwords)
+        mode1(allpass,amazon,mightyape,google)
     elif mode == '2':
-        mode2(allpass,usernames,passwords)
+        mode2()
     elif mode == '3':
-         mode3(usernames,passwords,allpass)
+         mode3()
     elif mode == '4':
         quit()
         
         
 #separate function for each mode as it separates code and looks cleaner
-def mode1(allpass,usernames,passwords):
+def mode1(allpass,amazon,mightyape,google):
     #allpass in this print statement tells the user of all websites that have the account info all ready saved
     print("Which password would you like to select out of",allpass)
     watpass = input(": ")
     #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
     #This part also compare watpass to there input and see what password they would like to display
     if watpass == 'Amazon':
-        print(usernames['Amazon'])
-        print(passwords['Amazon'])
+        for x in amazon:
+            print(x)
     elif watpass == 'Mightyape':
-        print(usernames['Mightyape'])
-        print(passwords['Mightyape'])
+        for i in mightyape:
+            print(i)
     elif watpass == 'Google':
-        print(usernames['Google'])
-        print(passwords['Google'])
+        for y in google:
+            print(y)
 
 #function envolving creating a new account for a new website. I have used a function because it will allow me to use this code infinite times
 
-def mode2(allpass,usernames,passwords):
+def mode2():
     addweb = input("What is the name of the website you would like to add?: ")
     adduse = input("What is the username you would like to add?: ")
     addpass = input("What is the name of the password you would like to add?: ")
     allpass.append(addweb)
-    usernames[addweb] = adduse
-    passwords[addweb] = addpass
-    print(usernames[addweb])
-    print(passwords[addweb])
+    newweb = 'addweb'
+    newweb = {}
+    newweb.append(addweb)
+    newweb.append('Username: ' +adduse)
+    newweb.append('Password: ' +addpass)
+    print(newweb)
+    return newweb;
 
-def mode3(usernames,passwords,allpass):
+def mode3():
     change = input("would you like to change your username or password")
     if change == 'username':
         uchange = input("What is the website you would like to change your username for?: ")
         if uchange == 'Amazon':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Amazon'] = newuse
-            print(usernames['Amazon'],"is now your new username")
+            del amazon [1]
+            newu = input("What is the new username you would like to enter?: ")
+            amazon.insert(1,'Username: '+newu)
+            print(amazon)
         elif uchange == 'Mightyape':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Mightyape'] = newuse
-            print(usernames['Mightyape'],"is now your new username")
-            
+            del mightyape [1]
+            newu = input("What is the new username you would like to enter?: ")
+            amazon.insert(1,'Username: '+newu)
+            print(amazon)
         elif uchange == 'Google':
-            newuse = input("What is the new username you would like to enter?: ")
-            usernames['Google'] = newuse
-            print(usernames['Google'],"is now your new username")
+            del google [1]
+            newu = input("What is the new username you would like to enter?: ")
+            amazon.insert(1,'Username: '+newu)
+            print(amazon)
 
             
     elif change == 'password':
         pchange = input("What is the website you would like to change your password for?: ")
         if pchange == 'Amazon':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Amazon'] = newpass
-            print(passwords['Amazon'],"is now your new password")
+            del amazon [2]
+            newp = input("What is the new password you would like to enter?: ")
+            amazon.append('Password: '+newp)
+            print(amazon)
         elif pchange == 'Mightyape':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Mightyape'] = newpass
-            print(passwords['Mightyape'],"is now your new password")
+            del mightyape [2]
+            newp = input("What is the new password you would like to enter?: ")
+            mightyape.append('Password: '+newp)
+            print(mightyape)
         elif pchange == 'Google':
-            newpass = input("What is the new password you would like to enter?: ")
-            passwords['Google'] = newpass
-            print(passwords['Google'],"is now your new password")
+            del google [2]
+            newp = input("What is the new password you would like to enter?: ")
+            google.append('Password: '+newp)
+            print(google)
+
 
 
 #lists for storing websites, usernames and passwords
@@ -85,26 +94,35 @@ def mode3(usernames,passwords,allpass):
 #stores the diffrent name of the websites that you have saved
 allpass = ['Amazon','Mightyape','Google']
 #stores the acount information for amazon
-usernames = {'Amazon':'Username: Danny',
-             'Mightyape':'Username: Danny89',
-             'Google':'Username: Bobby'}
+amazon = [
+    'Amazon','Username: Danny',
+    'Password: Superduper01'
+]
 #stores the acount information for mightyape
-passwords = {'Amazon':'Password: Super01',
-             'Mightyape':'Password: BOyshigh61',
-             'Google':'superduper33'}
-
+mightyape = [
+    'Mightyape','Username: Danny89',
+    'Password: Super01'
+]
+#stores the acount information for google
+google = [
+    'Google','Username: Bobby',
+    'Password: BOyshigh61'
+]
 
 #defining customers master id and password
-CUSID = 'daniel.h'
-CUSPASS = 'simple'
+cusid = 'daniel.h'
+cuspass = 'simple'
+
+
+print("Daniel Herbert, 18th March 2019, Version 5 of Password safe.")
 
 #checking whether returning user or new
 #returnuser = input("Are you a returing user?: ")
 #if returnuser == 'yes':
 nameuser = input("Enter your Master id: ")
-if nameuser == CUSID:
+if nameuser == cusid:
     passuser = input("Enter yout Master password: ")
-    if passuser == CUSPASS:
+    if passuser == cuspass:
         print ("Secusfully signed in.")
         select()
 """            

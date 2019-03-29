@@ -2,28 +2,14 @@
 
 
 
-
+import time
 
 #note add delays inbetween each print statement as to much info to read
 #function for selecting mode
 #passwordsafe
 
 #This when run asks the user whether the want to run the program again
-def runAgain():
-    #while loop used for error checking
-    while True:
-            run= input("Would you like to run this program again: yes/no: ")
-            #user enters a yes continues the program
-            if run == 'yes':
-                select()
-                break
-            #user enters a no quits the program
-            elif run == 'no':
-                quit()
-            else:
-                #else input is not valid and asks the user for another input
-                print("You have not entred 'yes' or 'no'. Please read the question carefully and tryagain: ")
-                continue
+
     
 def select():
     while True:
@@ -37,7 +23,7 @@ def select():
             break
         elif mode == '2':
             #this runs if the user is wanting to insert a new account to the program
-            mode2(allpass,usernames,passwords,count)
+            mode2(allpass,usernames,passwords)
             break
         elif mode == '3':
             #mode 3 is to change an existing username or password
@@ -57,14 +43,14 @@ def mode1(allpass,usernames,passwords):
     #allpass in this print statement tells the user of all websites that have the account info all ready saved
     while True:
         print("Which account would you like to select out of")
-        for num,web in allpass.items():
-            print(num,web)
+        print(allpass)
         watpass = input(": ")
         #in this section I have added for loops. This is so the list will print out clean with only the contents and no square brackets
         #This part also compare watpass to the user input and see what password they would like to display
-        if watpass == num:
+        if watpass in allpass:
             print(usernames[watpass])
             print(passwords[watpass])
+            time.sleep(2)
             break
 
         else:
@@ -75,7 +61,7 @@ def mode1(allpass,usernames,passwords):
 
 #function envolving creating a new account for a new website.
 
-def mode2(allpass,usernames,passwords,count):
+def mode2(allpass,usernames,passwords):
     #variable so the program knows the name of the website you want to add
     addweb = input("What is the name of the website you would like to add?: ")
     #username added here
@@ -83,8 +69,7 @@ def mode2(allpass,usernames,passwords,count):
     #password added here
     addpass = input("What is the name of the password you would like to add?: ")
     #addweb which is the website is being appended to the list allpass which holds all the websites
-    count=count+1
-    allpass[count] = (addweb)
+    allpass.append(addweb)
     
     
     #setting the new username and password inside their specific dictionaries
@@ -101,8 +86,11 @@ def mode2(allpass,usernames,passwords,count):
         elif corect== 'no':
             #starts mode 2 again so then the user can have another go at entering the website
             print("Ok",name,", we will start again.")
+            print(allpass)
+            del allpass[-1]
+            del usernames[addweb]
+            del passwords[addweb]
             mode2(allpass,usernames,passwords)
-            count=count-1
             break
         else:
             print("Please try again as that input was not 'yes' or 'no'.")
@@ -161,6 +149,7 @@ def mode3(usernames,passwords,allpass,run):
                 break
             elif corect== 'no':
                 #give the user another go at entering their new username or password
+                
                 print("Ok ",name,", we will start again.")
                 #set run back to 1 so it does not run nested while loop again
                 run=1
@@ -170,16 +159,16 @@ def mode3(usernames,passwords,allpass,run):
             else:
                 print(name,", please try again as that input was not 'yes' or 'no'.")
                 continue
-        runAgain()
+        select()
 
 #very important varable, this lets me run nested loop and than quit them when corect input is recieved
 run=1
-count=3
+
 #lists for storing websites, usernames and passwords
 
 #stores the diffrent names of the websites that you have saved
 
-allpass = {'1':'Amazon','2':'Mightyape','3':'Google'}
+allpass = ['Amazon','Mightyape','Google']
 #I have decided to use diticionaries he as it allows me to store multiple keys and call certain ones whenever I want
 #stores the acount information for all the usernames
 usernames = {'Amazon':'Username: Danny',
@@ -195,6 +184,9 @@ passwords = {'Amazon':'Password: Super01',
 #defining customers master id and master password. You have to enter these to acsess the rest of the program
 MASID = 'daniel.h'
 MASPASS = 'simple01yes'
+
+
+print("Daniel Herbert, 23rd March 2019, Version 8 of Password safe.")
 
 #the code that prevents user from entering the rest of the program unless they have this info
 

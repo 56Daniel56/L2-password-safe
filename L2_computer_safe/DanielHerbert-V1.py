@@ -9,7 +9,7 @@ cusid = 'daniel.h'
 cuspass = 'secrect'
 
 #pre entred usernames and passwords
-
+print("Daniel Herbert, 15th March 2019, Version 1 of Password safe.")
 
 #checking whether returning user or new
 returnuser = input("Are you a returing user?: ")
@@ -20,10 +20,5 @@ if returnuser == 'yes':
         if passuser == cuspass:
             print ("Secusfully signed in.")
             
-elif returnuser == 'no':
-    newuser = input("Enter your new username: ")
-    newpass = input("Enter your new password: ")
-    print("Secusfully created a new account")
-
     
 
