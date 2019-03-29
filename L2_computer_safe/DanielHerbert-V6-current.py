@@ -14,6 +14,7 @@ def line():
     print("-----------------------------------------")
     
 
+#mode 1 function lets the user veiw a certain account which is stored with in the program
 def mode1(sites_list,usernames,passwords):
     #sites_list in this print statement tells the user of all websites that have the account info all ready saved
     while True:
@@ -21,15 +22,15 @@ def mode1(sites_list,usernames,passwords):
         #in this section I have added a for loop. This is so the list will print out clean with only the content and no square brackets
         for web in sites_list:
             print(web)
-        watpass = input("Please enter one of the listed options: ").capitalize()
+        website = input("Please enter one of the listed options: ").capitalize()
         line()
-        #This part also compare watpass to the user input and see what password they would like to display
+        #This part also compare website to the user input and see what password they would like to display
 
-        if watpass in sites_list:
+        if website in sites_list:
             #This line envolves comparig wattpass to all the elements in sites_list
             #I have this way because it is signifcuntly more cleaner than hard coding it and it allows for more websites than what is already hard coded
-            print(usernames[watpass])
-            print(passwords[watpass])
+            print(usernames[website])
+            print(passwords[website])
             time.sleep(2)
             break
 
@@ -49,25 +50,21 @@ def mode2(sites_list,usernames,passwords):
     #appends the users website they would like to add to the sites_variable
     #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
     sites_list.append(addweb)
-
-    usernames[addweb] = ('Username:'+adduse)
-    passwords[addweb] = ('Password:'+addpass)
-
-    print(usernames[addweb])
-    print(passwords[addweb])
+    
     while True:
-        #checks user entred the corect and are happy with the values they have entred
-        corect = input("Are you happy with what you have entred? 'yes' or 'no': ").lower()
-        if corect.startswith('y'):
+        #checks user entred the correct and are happy with the values they have entred
+        confirm = input("Are you happy with what you have entred? 'yes' or 'no': ").lower()
+        if confirm.startswith('y'):
+            usernames[addweb] = ('Username:'+adduse)
+            passwords[addweb] = ('Password:'+addpass)
+            print(usernames[addweb])
+            print(passwords[addweb])
             break
-        elif corect.startswith('n'):
+        elif confirm.startswith('n'):
             #starts mode 2 again so then the user can have another go at entering the website
             #I have done this because it makes my program more flexible and able to handle more tasks
             print("Ok",name,", we will start again.")
             print(sites_list)
-            del sites_list[-1]
-            del usernames[addweb]
-            del passwords[addweb]
             mode2(sites_list,usernames,passwords)
             break
         else:
@@ -107,7 +104,7 @@ def mode3(usernames,passwords,sites_list,run):
                     run=run+1
                     break
                 else:
-                    print("Sorry ",name," that is not a website or you have spelt it incorectly, please try again and enter carefully.")
+                    print("Sorry ",name," that is not a website or you have spelt it in corectly, please try again and enter carefully.")
                     continue
         #user whishes to change password
         elif change == 'password':
@@ -134,11 +131,11 @@ def mode3(usernames,passwords,sites_list,run):
             print("Sorry," ,name, " that was not a valid input. Try entering either 'username' or 'password'")
             continue
         while True:
-            #checks user entred the corect values
-            corect = input("Are you happy with what you have changed?. 'yes' or 'no': ").lower()
-            if corect.startswith('y'):
+            #checks user entred the correct values
+            confirm = input("Are you happy with what you have changed?. 'yes' or 'no': ").lower()
+            if confirm.startswith('y'):
                 break
-            elif corect.startswith('n'):
+            elif confirm.startswith('n'):
                 #give the user another go at entering their new username or password
                 print("Ok ",name,", we will start again.")
                 #set run back to 1 so it does not run nested while loop again
@@ -186,7 +183,7 @@ line()
 name = input("What is you'r name?: ")
 while True:
     #This line represents the amount of tries user can atempt before being kicked out of the program
-    #I have done this to prevent people from entering a password 10000 times than eventuly getting it corect.
+    #I have done this to prevent people from entering a password 10000 times than eventuly getting it correct.
     if tries<3:
         #just simple username and password to stop someone random using the program + welcome message
         userid = input("Enter Master id: ")
