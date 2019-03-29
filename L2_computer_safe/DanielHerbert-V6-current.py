@@ -16,7 +16,7 @@ def line():
 
 #mode 1 function lets the user veiw a certain account which is stored with in the program
 #Will be also able to veiw user added accounts once they are created
-def mode1(sites_list,usernames,passwords):
+def veiw(sites_list,usernames,passwords):
     #sites_list in this print statement tells the user of all websites that have the account info all ready saved
     while True:
         print("Which account would you like to select out of")
@@ -43,7 +43,7 @@ def mode1(sites_list,usernames,passwords):
 
 #function envolving creating a user specified account for a new website.
 #asks for all needed infomation for an account, apends and inserts that info into the matching lists and dictionaries
-def mode2(sites_list,usernames,passwords):
+def add(sites_list,usernames,passwords):
     #variable so the program knows the name of the website you want to add
     addweb = input("What is the name of the website you would like to add?: ").capitalize()
     adduser = input("What is the username you would like to add?: ")
@@ -66,7 +66,7 @@ def mode2(sites_list,usernames,passwords):
             #I have done this because it makes my program more flexible and able to handle more tasks
             print("Ok",name,", we will start again.")
             print(sites_list)
-            mode2(sites_list,usernames,passwords)
+            add(sites_list,usernames,passwords)
             break
         else:
             print("Please try again as that input was not 'yes' or 'no'.")
@@ -80,7 +80,7 @@ def mode2(sites_list,usernames,passwords):
 #asks user whether they want to change username or password
 #Than asks them what website they want to change
 #Than asks them for the change and inserts it into dictionary
-def mode3(usernames,passwords,sites_list,run):
+def modify(usernames,passwords,sites_list,run):
     while True:
         #I have used a nested while loop here so I am able to have an exception so that my program want break.
         #I am able to check validness for to different inputs
@@ -141,7 +141,7 @@ def mode3(usernames,passwords,sites_list,run):
                 print("Ok ",name,", we will start again.")
                 #set run back to 1 so it does not run nested while loop again
                 run=1
-                mode3(usernames,passwords,sites_list,run)
+                modify(usernames,passwords,sites_list,run)
                 break
                 
             else:
@@ -213,15 +213,15 @@ while True:
             #once user has entred mode is mode 1 runs this code
             if mode == 1:
                 #runs the code when the user is wanting to check for a existing username and password
-                mode1(sites_list,usernames,passwords)
+                veiw(sites_list,usernames,passwords)
                 continue
             elif mode == 2:
                 #this runs if the user is wanting to insert a new account to the program
-                mode2(sites_list,usernames,passwords)
+                add(sites_list,usernames,passwords)
                 continue
             elif mode == 3:
                 #mode 3 is to change an existing username or password
-                mode3(usernames,passwords,sites_list,run)
+                modify(usernames,passwords,sites_list,run)
                 continue    
             elif mode == 4:
                 #mode 4 quits the program
