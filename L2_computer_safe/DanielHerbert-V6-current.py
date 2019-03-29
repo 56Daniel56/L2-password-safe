@@ -44,14 +44,20 @@ def veiw(sites_list,usernames,passwords):
 #function envolving creating a user specified account for a new website.
 #asks for all needed infomation for an account, apends and inserts that info into the matching lists and dictionaries
 def add(sites_list,usernames,passwords):
-    #variable so the program knows the name of the website you want to add
-    addweb = input("What is the name of the website you would like to add?: ").capitalize()
-    adduser = input("What is the username you would like to add?: ")
-    addpass = input("What is the name of the password you would like to add?: ")
-    #appends the users website they would like to add to the sites_variable
-    #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
-    sites_list.append(addweb)
-    
+    while True:
+        #variable so the program knows the name of the website you want to add
+        addweb = input("What is the name of the website you would like to add?: ").capitalize()
+        if addweb in sites_list:
+            print("Sorry" ,name, ",that is already an existing website. Please try again with a different website name.")
+            continue
+        #appends the users website they would like to add to the sites_variable
+        #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
+        else:
+            adduser = input("What is the username you would like to add?: ")
+            addpass = input("What is the name of the password you would like to add?: ")
+            sites_list.append(addweb)
+            break
+        
     while True:
         #checks user entred the correct and are happy with the values they have entred
         confirm = input("Are you happy with what you have entred? 'yes' or 'no': ").lower()
