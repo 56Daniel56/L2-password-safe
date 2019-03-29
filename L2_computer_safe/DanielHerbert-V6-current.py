@@ -15,6 +15,7 @@ def line():
     
 
 #mode 1 function lets the user veiw a certain account which is stored with in the program
+#Will be also able to veiw user added accounts once they are created
 def mode1(sites_list,usernames,passwords):
     #sites_list in this print statement tells the user of all websites that have the account info all ready saved
     while True:
@@ -40,12 +41,12 @@ def mode1(sites_list,usernames,passwords):
 
     
 
-#function envolving creating a new account for a new website.
+#function envolving creating a user specified account for a new website.
 #asks for all needed infomation for an account, apends and inserts that info into the matching lists and dictionaries
 def mode2(sites_list,usernames,passwords):
     #variable so the program knows the name of the website you want to add
     addweb = input("What is the name of the website you would like to add?: ").capitalize()
-    adduse = input("What is the username you would like to add?: ")
+    adduser = input("What is the username you would like to add?: ")
     addpass = input("What is the name of the password you would like to add?: ")
     #appends the users website they would like to add to the sites_variable
     #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
@@ -55,7 +56,7 @@ def mode2(sites_list,usernames,passwords):
         #checks user entred the correct and are happy with the values they have entred
         confirm = input("Are you happy with what you have entred? 'yes' or 'no': ").lower()
         if confirm.startswith('y'):
-            usernames[addweb] = ('Username:'+adduse)
+            usernames[addweb] = ('Username:'+adduser)
             passwords[addweb] = ('Password:'+addpass)
             print(usernames[addweb])
             print(passwords[addweb])
