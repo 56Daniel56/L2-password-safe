@@ -14,9 +14,9 @@ def line():
     print("-----------------------------------------")
     
 
-#mode 1 function lets the user veiw a certain account which is stored with in the program
-#Will be also able to veiw user added accounts once they are created
-def veiw(sites_list,usernames,passwords):
+#mode 1 function lets the user view a certain account which is stored with in the program
+#Will be also able to view user added accounts once they are created
+def view(sites_list,usernames,passwords):
     #sites_list in this print statement tells the user of all websites that have the account info all ready saved
     while True:
         print("Which account would you like to select out of")
@@ -71,7 +71,6 @@ def add(sites_list,usernames,passwords):
             #starts mode 2 again so then the user can have another go at entering the website
             #I have done this because it makes my program more flexible and able to handle more tasks
             print("Ok",name,", we will start again.")
-            print(sites_list)
             add(sites_list,usernames,passwords)
             break
         else:
@@ -219,7 +218,7 @@ while True:
             #once user has entred mode is mode 1 runs this code
             if mode == 1:
                 #runs the code when the user is wanting to check for a existing username and password
-                veiw(sites_list,usernames,passwords)
+                view(sites_list,usernames,passwords)
                 continue
             elif mode == 2:
                 #this runs if the user is wanting to insert a new account to the program
