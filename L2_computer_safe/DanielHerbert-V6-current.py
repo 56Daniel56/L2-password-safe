@@ -1,20 +1,36 @@
 #L2-Password-Safe: V6
 #Daniel Herbert
 #28th March 2019
+#
+# This program is the first stage of a password manager - which provides an interface to remember the multitude of passwords use across various web sites and/or applications
+# which require a user name and password combination, to provide authentication access.
+#
+# There are three main functions, called from a main menu
+# 1. View
+# 2. Add
+# 3. Modify (change)
+#
+# There are three hard coded websites, with respective username and passwords - this is not good practice for an actual
+# password manager app ( storing passwords in application code is not good practice ) though used here for illustrative purposes.
+#
+# Note: This program contains no real passwords, I use.
+#
+# Limitations of this program
+# 1. This version will not store the username/password combo, persistently, meaning a restart will lose any previous entries
+# 2. Passwords entered, are displayed in plain text - no masking on the display or encrypting ( hash alogrithm )  the input.
+# 
+
 
 import time
 
 
-#functions
-#I have used multiple functions in this program as I will need to run this code over and over again
-
 #function used as a print to separate the code
 #looks cleaner for the user
-def line():
+def print_dash_line():
     print("-----------------------------------------")
     
 
-#mode 1 function lets the user view a certain account which is stored with in the program
+### view ### :  function lets the user view a certain account which is stored with in the program
 #Will be also able to view user added accounts once they are created
 def view(sites_list,usernames,passwords):
     #sites_list in this print statement tells the user of all websites that have the account info all ready saved
@@ -22,26 +38,20 @@ def view(sites_list,usernames,passwords):
         print("Which account would you like to select out of")
         #in this section I have added a for loop. This is so the list will print out clean with only the content and no square brackets
         for web in sites_list:
-            print(web)
-        website = input("Please enter one of the listed options: ").capitalize()
-        line()
-        #This part also compare website to the user input and see what password they would like to display
+            print(sites_list.index(web),web)
+        website = int(input("Please enter the site number you wish to view: "))
+        print_dash_line()
+        print ("I have selected " , sites_list[website] )
+        
 
-        if website in sites_list:
-            #This line envolves comparig wattpass to all the elements in sites_list
-            #I have this way because it is signifcuntly more cleaner than hard coding it and it allows for more websites than what is already hard coded
-            print(usernames[website])
-            print(passwords[website])
-            time.sleep(2)
-            break
+        print(usernames.get(sites_list[website]))
+        print(passwords.get(sites_list[website]))
+        time.sleep(2)
+        break
 
-        else:
-            print("Sorry",name," this account is not available within this program. Please try typing in the website again typing the letters exactly the same as it displays.")
-            continue
-
-    
-
-#function envolving creating a user specified account for a new website.
+            
+ 
+### add ### function envolving creating a user specified account for a new website.
 #asks for all needed infomation for an account, apends and inserts that info into the matching lists and dictionaries
 def add(sites_list,usernames,passwords):
     while True:
@@ -70,8 +80,7 @@ def add(sites_list,usernames,passwords):
         elif confirm.startswith('n'):
             #starts mode 2 again so then the user can have another go at entering the website
             #I have done this because it makes my program more flexible and able to handle more tasks
-            print("Ok",name,", we will start again.")
-            add(sites_list,usernames,passwords)
+            print("Ok",name,", we will go back to the main menu.")
             break
         else:
             print("Please try again as that input was not 'yes' or 'no'.")
@@ -81,7 +90,7 @@ def add(sites_list,usernames,passwords):
 
             
 
-#mode 3 allows user to change a username or password for one of the websites
+### modify ### allows user to change a username or password for one of the websites
 #asks user whether they want to change username or password
 #Than asks them what website they want to change
 #Than asks them for the change and inserts it into dictionary
@@ -100,7 +109,7 @@ def modify(usernames,passwords,sites_list,run):
                     print(web)
                 uchange = input(": ").capitalize()
                 if uchange in sites_list:
-                    line()
+                    print_dash_line()
                     newuse = input("What is the new username you would like to enter?: ")
                     #enters new username into the dictionary
                     usernames[uchange] = ('Username:'+newuse)
@@ -118,15 +127,19 @@ def modify(usernames,passwords,sites_list,run):
                 #displays all websites avilible to be changed
                 print("What is the website you would like to change your password for?\nOut of")
                 for web in sites_list:
-                    print(web)
-                pchange = input(": ").capitalize()
-                if pchange in sites_list:
-                    line()
+                    print(sites_list.index(web),web)
+                pchange = int(input("Please enter the site number you wish to change: "))
+                print_dash_line()
+
+        
+                site_to_change = sites_list[pchange]
+                if site_to_change in sites_list:
+                    print_dash_line()
                     newpass = input("What is the new password you would like to enter?: ")
                     #enters new password into the dictionary
-                    passwords[pchange] = ('Password:'+newpass)
+                    passwords[site_to_change] = ('Password:'+newpass)
                     #shows the user that it has been changed
-                    print(passwords[pchange],"is now set")
+                    print(passwords[site_to_change],"is now set")
                     #changes run to run=2 so the loop will not be ran again
                     run=run+1
                     break
@@ -157,36 +170,41 @@ def modify(usernames,passwords,sites_list,run):
 
 #Variables
 
+# run is used to break out of nested loops
 run=1
+# amount of attempts to enter the password safe app
+# if you exceed three, the app will exit
 tries=0
-#lists for storing websites, usernames and passwords
 
-#stores the diffrent names of the websites that you have saved
+
+#lists for storing websites, usernames and passwords
+#stores the different names of the websites that you have saved
 
 sites_list = ['Amazon','Mightyape','Google']
-#I have decided to use diticionaries he as it allows me to store multiple keys and call certain ones whenever I want
-#stores the acount information for all the usernames
+
+#I have decided to use diticionaries as it allows me to store multiple keys and retrieve certain ones
 usernames = {'Amazon':'Username: Danny',
              'Mightyape':'Username: Danny89',
              'Google':'Username: Bobby'}
 
-#stores the passwords for all the different websites
 passwords = {'Amazon':'Password: Super01',
              'Mightyape':'Password: BOyshigh61',
              'Google':'Password: superduper33'}
 
 
-#defining customers master id and master password. You have to enter these to acsess the rest of the program
+#defines master id and master password. You have to enter these to access the program
 MASID = 'daniel.h'
 MASPASS = 'simple01yes'
 
+VERSION = 'Version 6'
+DATE = '26th March 2019'
 
-#Code
-#info on program to help marking
-print("Daniel Herbert, 26th March 2019, Version 9 of Password safe.")
-#the code that prevents user from entering the rest of the program unless they have this info
-line()
-name = input("What is you'r name?: ")
+# printinfo on program
+print("Daniel Herbert, " + DATE + " , " + VERSION + " Password safe.")
+
+# check user has access to run this prograsm
+print_dash_line()
+name = input("What is your name?: ")
 while True:
     #This line represents the amount of tries user can atempt before being kicked out of the program
     #I have done this to prevent people from entering a password 10000 times than eventuly getting it correct.
@@ -197,7 +215,7 @@ while True:
         if userid == MASID and passuser == MASPASS:
             #I have not error checked for name as I let anyone be called what ever they want to be called
             print ("Secusfully signed in.")
-            line()
+            print_dash_line()
             print("Hello,",name,". This is a password safe programed in python to store account information for websites or anything else you desire.")
             print("There are several modes you can select within this password safe.")
             enter = input("Press enter when ready to start this program: ")
@@ -210,11 +228,11 @@ while True:
         quit()
     
     while True:
-        line()
+        print_dash_line()
         print("\nYou can choose one of the following modes:\n('1')Find an existing account\n('2')Add a new account\n('3')Change an existing username or password\n('4')Exit the program")
         try:
             mode = int(input("Choose selected mode by entering one of the aforementioned numbers which corresponds to the desired selection: "))
-            line()
+            print_dash_line()
             #once user has entred mode is mode 1 runs this code
             if mode == 1:
                 #runs the code when the user is wanting to check for a existing username and password
