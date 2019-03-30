@@ -62,11 +62,15 @@ def add(sites_list,usernames,passwords):
             continue
         #appends the users website they would like to add to the sites_variable
         #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
+        elif not addweb:
+            print("A website name is required, plese enter one")
+            continue
         else:
             adduser = input("What is the username you would like to add?: ")
             addpass = input("What is the name of the password you would like to add?: ")
             sites_list.append(addweb)
             break
+        
         
     while True:
         #checks user entred the correct and are happy with the values they have entred
@@ -101,20 +105,22 @@ def modify(usernames,passwords,sites_list,run):
         #asking whether the username or password wants to be changed
         change = input("would you like to change your username or password: ").lower()
         #user whishes to change username
-        if change == 'username':
+        if change.startswith('u'):
             while run<=1:
                 #displays all websites avilible to be changed
-                print("What is the website you would like to change your username for?\nOut of")
+                print("What is the website you would like to change your password for?\nOut of")
                 for web in sites_list:
-                    print(web)
-                uchange = input(": ").capitalize()
-                if uchange in sites_list:
+                    print(sites_list.index(web),web)
+                uchange = int(input("Please enter the site number you wish to change: "))
+
+                site_change = sites_list[uchange]
+                if site_change  in sites_list:
                     print_dash_line()
                     newuse = input("What is the new username you would like to enter?: ")
                     #enters new username into the dictionary
-                    usernames[uchange] = ('Username:'+newuse)
+                    usernames[site_change] = ('Username: '+newuse)
                     #shows the user that it has been changed
-                    print(usernames[uchange],"is now set")
+                    print(usernames[site_change],"is now set")
                     #changes run to run=2 so the loop will not be ran again
                     run=run+1
                     break
@@ -122,7 +128,7 @@ def modify(usernames,passwords,sites_list,run):
                     print("Sorry ",name," that is not a website or you have spelt it in corectly, please try again and enter carefully.")
                     continue
         #user whishes to change password
-        elif change == 'password':
+        elif change.startswith('p'):
             while run<=1:
                 #displays all websites avilible to be changed
                 print("What is the website you would like to change your password for?\nOut of")
@@ -132,14 +138,14 @@ def modify(usernames,passwords,sites_list,run):
                 print_dash_line()
 
         
-                site_to_change = sites_list[pchange]
-                if site_to_change in sites_list:
+                site_change = sites_list[pchange]
+                if site_change in sites_list:
                     print_dash_line()
                     newpass = input("What is the new password you would like to enter?: ")
                     #enters new password into the dictionary
-                    passwords[site_to_change] = ('Password:'+newpass)
+                    passwords[site_change] = ('Password: '+newpass)
                     #shows the user that it has been changed
-                    print(passwords[site_to_change],"is now set")
+                    print(passwords[site_change],"is now set")
                     #changes run to run=2 so the loop will not be ran again
                     run=run+1
                     break
