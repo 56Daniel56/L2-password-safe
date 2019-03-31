@@ -33,7 +33,7 @@ def print_dash_line():
 ### view ### :  function lets the user view a certain account which is stored with in the program
 #Will be also able to view user added accounts once they are created
 def view(sites_list,usernames,passwords):
-    #sites_list in this print statement tells the user of all websites that have the account info all ready saved
+    #sites_list in this print statement tells the user of all websites that have the account info already saved
     print("Which account would you like to select out of")
     #in this section I have added a for loop. This is so the list will print out clean with only the content and no square brackets
     for web in sites_list:
@@ -41,7 +41,7 @@ def view(sites_list,usernames,passwords):
 
     while True:
         try:
-            website = int(input("Please enter the coresponding number: "))
+            website = int(input("Please enter the corresponding number: "))
             print_dash_line()
             
             if website >= len(sites_list):
@@ -65,8 +65,8 @@ def view(sites_list,usernames,passwords):
 
             
  
-### add ### function envolving creating a user specified account for a new website.
-#asks for all needed infomation for an account, apends and inserts that info into the matching lists and dictionaries
+### add ### function allowing creation of a user specified website.
+#asks for all needed information for an account, apends and inserts that info into the matching lists and dictionaries
 def add(sites_list,usernames,passwords):
     while True:
         #variable so the program knows the name of the website you want to add
@@ -77,7 +77,7 @@ def add(sites_list,usernames,passwords):
         #appends the users website they would like to add to the sites_variable
         #I have used append because it will add the new element onto the end of the list and that is exactly where I want It
         elif not addweb:
-            print("A website name is required, plese enter one")
+            print("A website name is required, please enter one")
             continue
         else:
             adduser = input("What is the username you would like to add?: ")
@@ -87,8 +87,8 @@ def add(sites_list,usernames,passwords):
         
         
     while True:
-        #checks user entred the correct and are happy with the values they have entred
-        confirm = input("Are you happy with what you have entred? 'yes' or 'no': ").lower()
+        #checks user entered the correctly and are happy with the values they have entered
+        confirm = input("Are you happy with what you have entered? 'yes' or 'no': ").lower()
         if confirm.startswith('y'):
             usernames[addweb] = ('Username:'+adduser)
             passwords[addweb] = ('Password:'+addpass)
@@ -118,11 +118,11 @@ def modify(usernames,passwords,sites_list,run):
         #I am able to check validness for to different inputs
         #asking whether the username or password wants to be changed
         change = input("would you like to change your username or password: ").lower()
-        #user whishes to change username
+        #user wishes to change username
         if change.startswith('u'):
             while run<=1:
                 try:
-                    #displays all websites avilible to be changed
+                    #displays all websites available  to be changed
                     print("What is the website you would like to change your password for?\nOut of")
                     for web in sites_list:
                         print(sites_list.index(web),web)
@@ -151,11 +151,11 @@ def modify(usernames,passwords,sites_list,run):
                     continue
 
                 
-        #user whishes to change password
+        #user wishes to change password
         elif change.startswith('p'):
             while run<=1:
                 try:
-                    #displays all websites avilible to be changed
+                    #displays all websites available  to be changed
                     print("What is the website you would like to change your password for?\nOut of")
                     for web in sites_list:
                         print(sites_list.index(web),web)
@@ -196,7 +196,7 @@ def modify(usernames,passwords,sites_list,run):
             continue
             
     while True:
-        #checks user entred the correct values
+        #checks user entered the correct values
         confirm = input("Are you happy with what you have changed?. 'yes' or 'no': ").lower()
         if confirm.startswith('y'):
             break
@@ -227,7 +227,7 @@ tries=0
 
 sites_list = ['Amazon','Mightyape','Google']
 
-#I have decided to use diticionaries as it allows me to store multiple keys and retrieve certain ones
+#I have decided to use dictionaries as it allows me to store multiple keys and retrieve certain ones
 usernames = {'Amazon':'Username: Danny',
              'Mightyape':'Username: Danny89',
              'Google':'Username: Bobby'}
@@ -247,19 +247,19 @@ DATE = '26th March 2019'
 # printinfo on program
 print("Daniel Herbert, " + DATE + " , " + VERSION + " Password safe.")
 
-# check user has access to run this prograsm
+# check user has access to run this program
 print_dash_line()
 name = input("What is your name?: ")
 while True:
-    #This line represents the amount of tries user can atempt before being kicked out of the program
-    #I have done this to prevent people from entering a password 10000 times than eventuly getting it correct.
+    #This line represents the amount of tries user can attempt before being kicked out of the program
+    #I have done this to prevent people from entering a password 10000 times then eventually getting it correct.
     if tries<3:
         #just simple username and password to stop someone random using the program + welcome message
         userid = input("Enter Master id: ")
         passuser = input("Enter Master password: ")
         if userid == MASID and passuser == MASPASS:
-            #I have not error checked for name as I let anyone be called what ever they want to be called
-            print ("Secusfully signed in.")
+            #I have not error checked for name as I let anyone be called whatever they want to be called
+            print ("Successfully signed in.")
             print_dash_line()
             print("Hello " +name+ ". This is a password safe programed in python to store account information for websites or anything else you desire.")
             print("There are several modes you can select within this password safe.")
@@ -269,7 +269,7 @@ while True:
             print("Sorry you have either entered the username or password incorrectly, you need to enter these correctly to access the rest of the program")
             continue
     else:
-        print("Sorry you have reached the maximun amount of tries, goodbye.")
+        print("Sorry you have reached the maximum amount of tries, goodbye.")
         quit()
     
     while True:
@@ -278,7 +278,7 @@ while True:
         try:
             mode = int(input("Choose selected mode by entering one of the aforementioned numbers which corresponds to the desired selection: "))
             print_dash_line()
-            #once user has entred mode is mode 1 runs this code
+            #once user has entered mode is mode 1 runs this code
             if mode == 1:
                 #runs the code when the user is wanting to check for a existing username and password
                 view(sites_list,usernames,passwords)
@@ -296,7 +296,7 @@ while True:
                 print("Good bye")
                 quit()
 
-            #user has not entred a correct input tells them why and runs the loop again
+            #user has not entered a correct input tells them why and runs the loop again
             #here I have gone through and coded so that it tells the user exactly what they have done wrong
             #I have done this because next time the user tries a input they will know exactly how to fix it
             elif mode <1:
